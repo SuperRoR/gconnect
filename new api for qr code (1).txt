@@ -1,0 +1,154 @@
+http://113.23.226.22:1443/api/signin/signin.php?initcode=yftWiR56fUfdkf&auth=yUlmFGYtXElBPo6BJBuKtDkI21iD0D88n5zfFeW4   <---- Android
+http://113.23.226.22:1443/api/signin/signin.php?initcode=Tyu4.wOpd7KL23&auth=yUlmFGYtXElBPo6BJBuKtDkI21iD0D88n5zfFeW4   <---- IOS
+
+--- Get Authentication Key
+path: http://113.23.226.22:1443/api/signin/signin.php
+method: GET
+params: {"initcode":"yftWiR56fUfdkf","auth":"yUlmFGYtXElBPo6BJBuKtDkI21iD0D88n5zfFeW4"}
+
+Return: 
+(1)
+{
+	status : "ERROR: AUTHENTICATION",
+	data : "Authentication code is invalid"
+}
+(2)
+{
+	status : "ERROR: INITIALIZATION CODE",
+	data : "INITIALIZATION code is not supplied "
+}
+(3)
+{
+	status : "OK",
+	data : {
+		"auth_token": "1MgQjYCMLPspDZiMKmqjfuF7ojuV7yD3Mb"
+		"sip_setting_url": "http://113.23.226.22:1443/api/signin/get_sipsetting.php
+		"phonebook_url": "http://113.23.226.22:1443/api/signin/get_phonebook.php"
+		"update_url": "http://113.23.226.22:1443/api/signin/get_update.php"
+		}
+}
+
+--- Get SIP Configuration 
+path: http://192.168.1.254/api/signin/get-sipsetting.php (example)
+method: POST
+params: {initcode: "yftWiR56fUfdkf", "auth":"yUlmFGYtXElBPo6BJBuKtDkI21iD0D88n5zfFeW4", "os": "Android", osversion: "7", device_token: "XXXX-XXXX-XXXX"}
+HEADER: {Authorization: "Bearer token-xxxxxx"}
+Return: 
+{
+"wevopbx_local_domain":"113.23.226.22:26060",
+"wevopbx_domain":"113.23.226.22:26060",
+"phone_number":"+85590748240",
+"is_verified":1,
+"wevo_server_id":1,
+"extension":"901",
+"display_name":"test1",
+"email":"test1gmail.com",
+"wevo_device":{
+	"net_ipv6_allow":"1",
+	"adv_boot_start":"1",
+	"net_stun_turn_uname":null,
+	"call_vm_uri":"*97",
+	"video_overlay":"1",
+	"audio_codec_rate_lim":"36",
+	"net_push_notify_enable":"1",
+	"adv_pa_dname":null,
+	"acc_plus_00":"0",
+	"audio_adp_rate_enable":"1",
+	"chat_encrypt_enable":"0",
+	"net_rnd_ports_enable":"1",
+	"video_enable":"0",
+	"net_turn_enable":"0",
+	"device_token2":"123123123",
+	"net_wifi_only":"0",
+	"adv_svc_notify_enable":"1",
+	"net_ice_enable":"0",
+	"video_always_accept":"1",
+	"acc_secret":"12289222185a36c96139",
+	"call_use_internal_ringtone":"1",
+	"net_sip_port":null,
+	"call_media_encryption":"None",
+	"device_type":"android",
+	"call_dtmf_sipinfo_enable":"0",
+	"acc_transport":"tcp",
+	"acc_avpf_enable":"0",
+	"acc_proxy_enable":"0",
+	"adv_pa_uname":null,
+	"device_token":"c3QKy7aUGz4:APA91bGnv-ZpsJPbl_Y1npMn9QRq6MchvWxkN0XYg-FHgaT2VpyY-qMak9cQYdmF7ONeqCtmBZ_WRiJZehSNxZxY7FwhIzH8boO-D63rsLlPL41ubzyA9OUJP7N-Bb_CmuRqdd70MS_m",
+	"created_at":"2017-12-17 04:32:25",
+	"net_stun_turn_pass":null,
+	"adv_bg_enable":"1",
+	"acc_uname":"15915283125a36c96139",
+	"video_size":"qvga",
+	"call_auto_answer_enable":"0",
+	"video_always_initiate":"1",
+	"acc_prefix":null,
+	"chat_share_server":"https:\/\/www.linphone.org:444\/lft.php",
+	"acc_avpf_interval":"0",
+	"call_dtmf_rfc2833_enable":"1",
+	"audio_codec":"speex16k-speex8k-g7298k",
+	"acc_reg_expire":"3600",
+	"acc_disableac":"0",
+	"net_dmode_enable":"1",
+	"video_preset":"default",
+	"adv_flist_subs_enable":"0",
+	"net_stun_turn_server":null,
+	"audio_eco_can_enable":"0"
+	}
+}
+(2)
+{
+	{"status":"ERROR: INITIALIZATION CODE",
+	 "data": "INITIALIZATION not found"}
+}
+
+initcode, os, obversion are sent during initial get setting. Thereafter no need already.
+acc_name is will need to be sent after received new settings.
+
+
+--- Get PhoneBook Directory
+path: http://192.168.1.254/api/get_phonebook.php (example)
+method: POST
+params: {acc_uname: "15915283125a36c96139", device_token: "XXXX-XXXX-XXXX"}
+HEADER: {Authorization: "Bearer token-xxxxxx"}
+Return:
+{
+result: [
+	{
+		"first_name": "John",
+		"last_name": "Smith",
+		"email": "abc@gmail.com",
+		"extension": "800",
+		"mobile_number": "1234567890"
+	},
+	{
+		"first_name": "Max",
+		"last_name": "Kelly",
+		"email": "max@gmail.com",
+		"extension": "900",
+		"mobile_number": "4444567890"
+	}
+	...
+]
+}
+
+--- Get Update
+path: http://192.168.1.254/api/get_update.php(example)
+method: POST
+params: {acc_uname: "15915283125a36c96139", device_token: "XXXX-XXXX-XXXX"}
+HEADER: {Authorization: "Bearer token-xxxxxx"}
+Return:
+(1)
+{
+	status : "ErrorLogout",
+	data : "User is deleted" <- Print/Popup error sent by server
+}
+(2)
+{
+	status : "URLUpdate",
+	data : "sip_setting_url: http://192.168.1.254/api/get_setting1.php"
+}
+(3)
+{
+	status : "PhonebookUpdate", <--- Get new phonebook data from server.
+	data : {}
+}
