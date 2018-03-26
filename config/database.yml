@@ -23,3 +23,10 @@ test:
 production:
   <<: *default
   database: db/production.sqlite3
+production:
+	adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: gconnect_production
+  username: gconnect
+  password: <%= ENV['gconnect_DATABASE_PASSWORD'] %>
