@@ -14,6 +14,5 @@ module Gconnect
     config.paths.add 'app/api', glob: '**/*.rb'
     config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
 
-    config.web_console.whitelisted_ips = '192.168.77.13'
   end
 end
