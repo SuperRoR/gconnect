@@ -22,7 +22,6 @@ class OrderAPI < Grape::API
   desc 'Creat an order'
 
   post :create_order do
-    byebug
     if params[:auth].blank? || current_user.blank?
       {
           status: "ERROR: AUTHENTICATION"
