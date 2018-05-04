@@ -19,7 +19,7 @@ class SigninAPI < Grape::API
         {
             status: "OK",
             auth_token: user.auth_token,
-            sip_setting_url: "http://192.168.77.39:3000/api/signin/get_sipsetting",
+            sip_setting_url: ENV["ASSET_HOST"]+"/api/signin/get_sipsetting",
             phonebook_url: "http://113.23.226.22:1443/api/signin/get_phonebook.php",
             update_url: "http://113.23.226.22:1443/api/signin/get_update.php"
         }
