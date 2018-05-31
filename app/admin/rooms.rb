@@ -18,7 +18,7 @@ ActiveAdmin.register Room do
     column :ext_no
     column :ext_password
     actions do |room|
-      item "QR Code", "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=#{api_url+room.generate_qr_code_url}", class: "member_link", download: true
+      item "QR Code", "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=#{api_url+room.generate_qr_code_url}", class: "member_link", download: "QRcode_for_#{room.room_number}", target: "_blank"
     end
   end
 #
