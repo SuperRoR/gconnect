@@ -21,7 +21,6 @@ class OrderAPI < Grape::API
   desc 'Creat an order'
 
   post :create_order do
-    byebug
     if params[:hotel_name].blank? || params[:code].blank? || current_room.blank?
       {
           status: "ERROR: AUTHENTICATION"
