@@ -6,29 +6,29 @@ class OrderAPI < Grape::API
 
   get :get_order_list do
 
-    if params[:auth].blank? || current_user.blank?
+    if params[:hotel_name].blank? || params[:code].blank? || current_room.blank?
       {
           status: "ERROR: AUTHENTICATION"
       }
     else
       {
           status: "OK",
-          result: current_user.orders.as_json(include: { order_details: { include: :product }})
+          result: current_room.current_orders.as_json(include: { order_details: { include: :product }})
       }
-
     end
-
   end
+
   desc 'Creat an order'
 
   post :create_order do
-    if params[:auth].blank? || current_user.blank?
+    byebug
+    if params[:hotel_name].blank? || params[:code].blank? || current_room.blank?
       {
           status: "ERROR: AUTHENTICATION"
       }
     else
       if params[:order_details]
-        order = current_user.orders.create!
+        order = current_room.orders.create!
         order.order_details.create!(params[:order_details])
         {
             status: "OK",
@@ -39,11 +39,6 @@ class OrderAPI < Grape::API
           status: "OK"
         }
       end
-
-
     end
   end
-
-
-
 end

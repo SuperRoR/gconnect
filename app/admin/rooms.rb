@@ -1,10 +1,10 @@
-ActiveAdmin.register Product do
+ActiveAdmin.register Room do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
   scope_to proc{ current_admin_user.hotel},  unless: proc{ current_admin_user.is_super_admin? }
 
-  permit_params :name, :price, :amount, :icon
+# permit_params :list, :of, :attributes, :on, :model
 #
 # or
 #

@@ -6,14 +6,14 @@ class ProductAPI < Grape::API
 
   get :get_product_list do
 
-    if params[:auth].blank? || current_user.blank?
+    if params[:hotel_name].blank? || params[:code].blank? || current_room.blank?
       {
           status: "ERROR: AUTHENTICATION"
       }
     else
       {
           status: "OK",
-          result: Product.all.as_json
+          result: current_hotel.departments.as_json(include: :products)
       }
 
     end

@@ -2,7 +2,10 @@ ActiveAdmin.register Order do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :wevo_user_id, :status, :assignee_id
+  scope_to proc{ current_admin_user.hotel},  unless: proc{ current_admin_user.is_super_admin? }
+
+
+  permit_params :wevo_user_id, :status, :assignee_id
 #
 # or
 #

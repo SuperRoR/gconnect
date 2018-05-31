@@ -10,8 +10,11 @@ class API < Grape::API
   end
 
   helpers do
-    def current_user
-      WevoUser.where(auth_token: params[:auth]).first
+    def current_room
+      Hotel.friendly.find(params[:hotel_name]).rooms.where(code: params[:code]).first rescue nil
+    end
+    def current_hotel
+      Hotel.friendly.find(params[:hotel_name])
     end
   end
 

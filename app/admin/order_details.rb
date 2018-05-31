@@ -2,7 +2,9 @@ ActiveAdmin.register OrderDetail do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-# permit_params :list, :of, :attributes, :on, :model
+  scope_to proc{ current_admin_user.hotel},  unless: proc{ current_admin_user.is_super_admin? }
+
+ permit_params :order_id, :product_id, :amount
 #
 # or
 #

@@ -5,31 +5,28 @@ class SigninAPI < Grape::API
   desc 'Signin API'
 
   get :signin do
-    if params[:initcode].blank?
+    if params[:hotel_name].blank?
       {
-          status: "ERROR: INITIALIZATION CODE"
+          status: "ERROR: Hotel Name"
       }
-    elsif params[:auth].blank?
+    elsif params[:code].blank?
       {
-          status: "ERROR: AUTHENTICATION"
+          status: "ERROR: Room Code"
       }
     else
-      user = current_user
-      if user
+      room = current_room
+      if room.check_in
         {
             status: "OK",
-            auth_token: user.auth_token,
-            sip_setting_url: ENV["ASSET_HOST"]+"/api/signin/get_sipsetting",
-            phonebook_url: "http://113.23.226.22:1443/api/signin/get_phonebook.php",
-            update_url: "http://113.23.226.22:1443/api/signin/get_update.php"
+            from: room.from,
+            days: room.days,
+            sip_setting: {}
         }
       else
         {
-            status: "ERROR: AUTHENTICATION"
+            status: "ERROR: Wrong Hotel_Name or Room Code"
         }
       end
-
-
     end
 
   end
