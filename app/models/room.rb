@@ -14,7 +14,6 @@
 class Room < ApplicationRecord
   belongs_to :hotel
   has_many :orders, dependent: :destroy
-  has_one :wevo_user, dependent: :destroy
 
   def current_orders
     orders.where("created_at >= ?", from)
