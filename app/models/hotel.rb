@@ -15,8 +15,6 @@ class Hotel < ApplicationRecord
   has_many :rooms, dependent: :destroy
   has_many :orders, through: :rooms, dependent: :destroy
   has_many :order_details, through: :orders, dependent: :destroy
-  has_many :wevo_users, through: :rooms, dependent: :destroy
-  has_many :wevo_devices, through: :wevo_users, dependent: :destroy
   has_many :departments, dependent: :destroy
   has_many :products, through: :departments, dependent: :destroy
 
