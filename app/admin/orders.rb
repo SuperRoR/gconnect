@@ -4,8 +4,7 @@ ActiveAdmin.register Order do
 #
   scope_to proc{ current_admin_user.hotel},  unless: proc{ current_admin_user.is_super_admin? }
 
-
-  permit_params :wevo_user_id, :status, :assignee_id
+  permit_params :room_id, :status
 #
 # or
 #

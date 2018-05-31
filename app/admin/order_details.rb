@@ -4,7 +4,7 @@ ActiveAdmin.register OrderDetail do
 #
   scope_to proc{ current_admin_user.hotel},  unless: proc{ current_admin_user.is_super_admin? }
 
- permit_params :order_id, :product_id, :amount
+  permit_params :order_id, :product_id, :amount
 #
 # or
 #

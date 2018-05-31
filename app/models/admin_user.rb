@@ -26,6 +26,6 @@ class AdminUser < ApplicationRecord
   validates :hotel, presence: true, unless: :is_super_admin
 
   def hotels
-    Hotel.where(id: self.hotel.id)
+    Hotel.where(id: self.hotel.id).friendly
   end
 end

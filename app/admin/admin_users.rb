@@ -2,7 +2,7 @@ ActiveAdmin.register AdminUser do
   scope_to proc{ current_admin_user.hotel},  unless: proc{ current_admin_user.is_super_admin? }
 
   actions :all
-  permit_params :email, :password, :password_confirmation, :hotel_idm, :is_super_admin
+  permit_params :email, :password, :password_confirmation, :hotel_id, :is_super_admin
 
   index do
     selectable_column

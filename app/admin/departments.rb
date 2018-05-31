@@ -4,7 +4,7 @@ ActiveAdmin.register Department do
 #
   scope_to proc{ current_admin_user.hotel},  unless: proc{ current_admin_user.is_super_admin? }
 
-  permit_params :name
+  permit_params :name, :hotel_id
 #
 # or
 #

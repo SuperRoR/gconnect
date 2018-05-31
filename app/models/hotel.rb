@@ -4,7 +4,10 @@
 # name character varying,
 # description character varying,
 # created_at timestamp without time zone NOT NULL,
-# updated_at timestamp without time zone NOT NULL
+# updated_at timestamp without time zone NOT NULL,
+# slug character varying,
+# wevo_pbx_local_domain character varying,
+# wevo_pbx_remote_domain character varying,
 ##############
 
 class Hotel < ApplicationRecord
