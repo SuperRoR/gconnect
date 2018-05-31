@@ -6,9 +6,12 @@
 # sub_number integer DEFAULT 1,
 # status character varying DEFAULT 'checkout'::character varying,
 # "from" timestamp without time zone,
-# "to" timestamp without time zone,
 # created_at timestamp without time zone NOT NULL,
-# updated_at timestamp without time zone NOT NULL
+# updated_at timestamp without time zone NOT NULL,
+# days integer DEFAULT 1,
+# code character varying DEFAULT ''::character varying,
+# ext_no character varying,
+# ext_password character varying,
 ##############
 
 class Room < ApplicationRecord
@@ -25,6 +28,6 @@ class Room < ApplicationRecord
   end
 
   def generate_qr_code_url
-    "/api/signin?code=#{code}&hotel_name=#{self.hotel.friendly_id}"
+    "/signin/signin?code=#{code}&hotel_name=#{self.hotel.friendly_id}"
   end
 end
