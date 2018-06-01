@@ -53,6 +53,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #######
 gem 'devise'
 gem 'activeadmin'
+gem 'arctic_admin'
 gem 'grape'
 gem 'grape-entity'
 gem 'grape-swagger'
