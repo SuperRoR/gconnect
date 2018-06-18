@@ -28,7 +28,7 @@ class Hotel < ApplicationRecord
 
   def tenant_prefix
     if self.use_cloud
-      "#{id}_"
+      "#{format('%05d', id)}"
     else
       ""
     end
