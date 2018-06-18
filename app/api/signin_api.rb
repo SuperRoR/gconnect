@@ -13,9 +13,17 @@ class SigninAPI < Grape::API
       {
           status: "ERROR: Room Code"
       }
+    elsif params[:phone_type].blank?
+      {
+          status: "ERROR: Phone Type"
+      }
+    elsif params[:device_token1].blank?
+      {
+          status: "ERROR: Device Token"
+      }
     else
       room = current_room
-      if room.check_in
+      if room.sign_in(params[:phone_type], params[:device_token1], params[:device_token2])
         {
             status: "OK",
             from: room.from,
@@ -23,8 +31,7 @@ class SigninAPI < Grape::API
             sip_setting: {
                 ext_no: room.ext_no,
                 ext_password: room.ext_password,
-                wevo_pbx_local_domain: current_hotel.wevo_pbx_local_domain,
-                wevo_pbx_remote_domain: current_hotel.wevo_pbx_remote_domain
+                wevo_pbx_domain: current_hotel.wevo_pbx_domain,
             }
         }
       else

@@ -10,8 +10,32 @@
 // Active Admin's got SASS!
 @import "active_admin/mixins";
 @import "arctic_admin/base";
+@import "jquery-ui";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+.status-btn {
+  background-color: #5E6469;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  display: inline-block;
+  -webkit-transition: border 0.2s linear, color 0.2s linear, width 0.2s linear, background-color 0.2s linear;
+  -o-transition: border 0.2s linear, color 0.2s linear, width 0.2s linear, background-color 0.2s linear;
+  transition: border 0.2s linear, color 0.2s linear, width 0.2s linear, background-color 0.2s linear;
+  cursor: pointer;
+  padding: 2px 9px;
+  margin-right: 4px;
+}
+.icon-image img {
+  width: 100px;
+}
+.best_in_place.bip-placeholder {
+  display: block;
+  min-width: 60px;
+}

@@ -14,4 +14,5 @@
 class Product < ApplicationRecord
   mount_uploader :icon, IconUploader
   belongs_to :department
+  delegate :hotel, :to => :department, :allow_nil => true
 end

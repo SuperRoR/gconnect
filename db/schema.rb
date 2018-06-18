@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180531044609) do
+ActiveRecord::Schema.define(version: 20180615131501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,20 +30,22 @@ ActiveRecord::Schema.define(version: 20180531044609) do
   end
 
   create_table "admin_users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                  default: "",                   null: false
+    t.string   "encrypted_password",     default: "",                   null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,                    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.integer  "hotel_id"
-    t.boolean  "is_super_admin",         default: false
+    t.string   "role",                   default: "department_manager"
+    t.integer  "department_id"
+    t.index ["department_id"], name: "index_admin_users_on_department_id", using: :btree
     t.index ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
     t.index ["hotel_id"], name: "index_admin_users_on_hotel_id", using: :btree
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
@@ -72,11 +74,12 @@ ActiveRecord::Schema.define(version: 20180531044609) do
   create_table "hotels", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
     t.string   "slug"
     t.string   "wevo_pbx_local_domain"
-    t.string   "wevo_pbx_remote_domain"
+    t.string   "wevo_pbx_remote_domain", default: "cloudpbx.gconnect.com"
+    t.boolean  "use_cloud",              default: true
     t.index ["slug"], name: "index_hotels_on_slug", using: :btree
   end
 
@@ -89,10 +92,10 @@ ActiveRecord::Schema.define(version: 20180531044609) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string   "status",     default: "PENDING", null: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "room_id"
+    t.string   "status",     default: "pending", null: false
     t.index ["room_id"], name: "index_orders_on_room_id", using: :btree
   end
 
@@ -111,15 +114,23 @@ ActiveRecord::Schema.define(version: 20180531044609) do
   create_table "rooms", force: :cascade do |t|
     t.integer  "hotel_id"
     t.string   "room_number"
-    t.integer  "sub_number",   default: 1
-    t.string   "status",       default: "checkout"
+    t.integer  "sub_number",                default: 0
+    t.string   "status",                    default: "checkout"
     t.datetime "from"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.integer  "days",         default: 1
-    t.string   "code",         default: ""
-    t.string   "ext_no"
-    t.string   "ext_password"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.integer  "days",                      default: 1
+    t.string   "code",                      default: ""
+    t.string   "ext_phone_type1"
+    t.string   "ext_no1"
+    t.string   "ext_password1"
+    t.string   "ext_device_token_android1"
+    t.string   "ext_device_token_ios1"
+    t.string   "ext_phone_type2"
+    t.string   "ext_no2"
+    t.string   "ext_password2"
+    t.string   "ext_device_token_android2"
+    t.string   "ext_device_token_ios2"
     t.index ["code"], name: "index_rooms_on_code", unique: true, using: :btree
     t.index ["hotel_id"], name: "index_rooms_on_hotel_id", using: :btree
   end

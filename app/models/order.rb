@@ -8,10 +8,11 @@
 ##############
 
 class Order < ApplicationRecord
-  ORDERSTATUS = ["PENDING", "ACKNOWLEDGE", "SERVING", "FINISH"]
   has_many :order_details, dependent: :destroy
   belongs_to :room
+  delegate :hotel, :to => :room, :allow_nil => true
   # belongs_to :assignee, class_name: "WevoUser", foreign_key: "assignee_id", required: false
-  validates :status, :inclusion => { :in => ORDERSTATUS }
+  as_enum :status, [:pending, :acknowledge, :serving, :finish], source: :status, map: :string
   default_scope { order(created_at: :desc) }
+  validates :room, presence: true
 end

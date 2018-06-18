@@ -8,6 +8,7 @@
 # slug character varying,
 # wevo_pbx_local_domain character varying,
 # wevo_pbx_remote_domain character varying,
+# use_cloud boolean DEFAULT true,
 ##############
 
 class Hotel < ApplicationRecord
@@ -20,8 +21,26 @@ class Hotel < ApplicationRecord
   has_many :rooms, dependent: :destroy
   has_many :products, through: :departments, dependent: :destroy
   has_many :departments, dependent: :destroy
+
   def get_order_details
     OrderDetail.where(id: self.order_details.ids)
+  end
+
+  def tenant_prefix
+    if use_cloud
+      "#{id}_"
+    else
+      ""
+    end
+
+  end
+
+  def wevo_pbx_domain
+    if use_cloud
+      wevo_pbx_remote_domain
+    else
+      wevo_pbx_local_domain
+    end
   end
 
 end
