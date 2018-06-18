@@ -28,12 +28,12 @@ class Room < ApplicationRecord
 
   def sign_in(phone_type, token1, token2)
     switch_subaccount
-    if sub_number == 0
+    if self.sub_number == 0
       self.ext_phone_type1 = phone_type
       self.ext_device_token_android1 = token1
       self.ext_device_token_ios1 = token2
       self.save
-    elsif sub_number == 1
+    elsif self.sub_number == 1
       self.ext_phone_type2 = phone_type
       self.ext_device_token_android2 = token1
       self.ext_device_token_ios2 = token2
@@ -53,22 +53,22 @@ class Room < ApplicationRecord
   end
 
   def ext_no
-    if sub_number == 0
-      hotel.tenant_prefix + ext_no1
-    elsif sub_number == 1
-      hotel.tenant_prefix + ext_no2
+    if self.sub_number == 0
+      self.hotel.tenant_prefix + self.ext_no1
+    elsif self.sub_number == 1
+      self.hotel.tenant_prefix + self.ext_no2
     else
-      hotel.tenant_prefix + ext_no1
+      self.hotel.tenant_prefix + self.ext_no1
     end
   end
 
   def ext_password
-    if sub_number == 0
-      ext_password1
+    if self.sub_number == 0
+      self.ext_password1
     elsif sub_number == 1
-      ext_password2
+      self.ext_password2
     else
-      ext_password1
+      self.ext_password1
     end
 
   end
@@ -82,7 +82,7 @@ class Room < ApplicationRecord
   end
 
   def next_status
-    if status == :checkout
+    if self.status == :checkout
       :checkin
     else
       :checkout

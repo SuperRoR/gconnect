@@ -27,7 +27,7 @@ class Hotel < ApplicationRecord
   end
 
   def tenant_prefix
-    if use_cloud
+    if self.use_cloud
       "#{id}_"
     else
       ""
@@ -36,10 +36,10 @@ class Hotel < ApplicationRecord
   end
 
   def wevo_pbx_domain
-    if use_cloud
-      wevo_pbx_remote_domain
+    if self.use_cloud
+      self.wevo_pbx_remote_domain
     else
-      wevo_pbx_local_domain
+      self.wevo_pbx_local_domain
     end
   end
 
