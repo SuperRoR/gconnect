@@ -54,11 +54,11 @@ class Room < ApplicationRecord
 
   def ext_no
     if self.sub_number == 0
-      self.hotel.tenant_prefix + self.ext_no1
+      "#{self.hotel.tenant_prefix}#{self.ext_no1}"
     elsif self.sub_number == 1
-      self.hotel.tenant_prefix + self.ext_no2
+      "#{self.hotel.tenant_prefix}#{self.ext_no2}"
     else
-      self.hotel.tenant_prefix + self.ext_no1
+      "#{self.hotel.tenant_prefix}#{self.ext_no1}"
     end
   end
 
