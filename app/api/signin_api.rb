@@ -26,12 +26,12 @@ class SigninAPI < Grape::API
       if room.sign_in(params[:phone_type], params[:device_token1], params[:device_token2])
         {
             status: "OK",
-            from: room.from,
-            days: room.days,
+            from: room.from.to_s,
+            days: room.days.to_s,
             sip_setting: {
-                ext_no: room.ext_no,
-                ext_password: room.ext_password,
-                wevo_pbx_domain: current_hotel.wevo_pbx_domain,
+                ext_no: room.ext_no.to_s,
+                ext_password: room.ext_password.to_s,
+                wevo_pbx_domain: current_hotel.wevo_pbx_domain.to_s,
             }
         }
       else
