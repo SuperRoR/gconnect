@@ -22,3 +22,5 @@
 .env
 .idea
 .ruby-gemset
+/config/database.yml
+
