@@ -12,6 +12,7 @@ ActiveAdmin.register OrderDetail do
   index do
     selectable_column
     id_column
+    column :hotel
     column :room
     column :order
     column :product

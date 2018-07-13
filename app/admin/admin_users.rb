@@ -28,7 +28,7 @@ ActiveAdmin.register AdminUser do
       f.input :password_confirmation
       f.input :hotel if current_admin_user.super_admin?
       f.input :department, :as => :select, :collection => current_admin_user.departments unless current_admin_user.department_manager?
-      f.input :role, :as => :select, :collection => current_admin_user.super_admin? ? enum_option_pairs(AdminUser,  AdminUser.roles) : {"department_manager"=>"department_manager"}, include_blank: false if f.object.new_record? && current_admin_user.super_admin?
+      f.input :role, :as => :select, :collection => current_admin_user.super_admin? ? enum_option_pairs(AdminUser,  AdminUser.roles) : {"department_manager"=>"department_manager"}, include_blank: false
     end
     f.actions
   end

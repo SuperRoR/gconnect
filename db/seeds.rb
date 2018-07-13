@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-AdminUser.create!(email: 'superadmin@gconnect.com', password: 'password123', password_confirmation: 'password123', is_super_admin: true) if Rails.env.development?
+AdminUser.create!(email: 'superadmin@gconnect.com', password: 'password123', password_confirmation: 'password123', role: :super_admin) if Rails.env.development?
 hotel_1 = Hotel.create!(name: "Hotel 1", description: "example hotel one")
 hotel_2 = Hotel.create!(name: "Hotel 2", description: "example hotel two")
 [hotel_1, hotel_2].each_with_index do |hotel, index|
@@ -25,5 +25,5 @@ hotel_2 = Hotel.create!(name: "Hotel 2", description: "example hotel two")
                       {name: "Tissue", category_id: 1, price: 4, amount: 87}
                   ])
 
-  hotel.admin_users.create!(email: "hoteladmin_#{index+1}@gconnect.com", password: 'password123', password_confirmation: 'password123') if Rails.env.development?
+  hotel.admin_users.create!(email: "hoteladmin_#{index+1}@gconnect.com", password: 'password123', password_confirmation: 'password123', role: :hotel_admin) if Rails.env.development?
 end

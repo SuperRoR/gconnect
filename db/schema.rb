@@ -12,24 +12,21 @@
 
 ActiveRecord::Schema.define(version: 20180615131501) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "active_admin_comments", force: :cascade do |t|
+  create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "namespace"
-    t.text     "body"
+    t.text     "body",          limit: 65535
     t.string   "resource_type"
     t.integer  "resource_id"
     t.string   "author_type"
     t.integer  "author_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
   end
 
-  create_table "admin_users", force: :cascade do |t|
+  create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "",                   null: false
     t.string   "encrypted_password",     default: "",                   null: false
     t.string   "reset_password_token"
@@ -51,7 +48,7 @@ ActiveRecord::Schema.define(version: 20180615131501) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "departments", force: :cascade do |t|
+  create_table "departments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -59,7 +56,7 @@ ActiveRecord::Schema.define(version: 20180615131501) do
     t.index ["hotel_id"], name: "index_departments_on_hotel_id", using: :btree
   end
 
-  create_table "friendly_id_slugs", force: :cascade do |t|
+  create_table "friendly_id_slugs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
     t.string   "sluggable_type", limit: 50
@@ -71,7 +68,7 @@ ActiveRecord::Schema.define(version: 20180615131501) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
 
-  create_table "hotels", force: :cascade do |t|
+  create_table "hotels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at",                                               null: false
@@ -83,7 +80,7 @@ ActiveRecord::Schema.define(version: 20180615131501) do
     t.index ["slug"], name: "index_hotels_on_slug", using: :btree
   end
 
-  create_table "order_details", force: :cascade do |t|
+  create_table "order_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "order_id",               null: false
     t.integer  "product_id",             null: false
     t.integer  "amount",     default: 0, null: false
@@ -91,7 +88,7 @@ ActiveRecord::Schema.define(version: 20180615131501) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "orders", force: :cascade do |t|
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "room_id"
@@ -99,7 +96,7 @@ ActiveRecord::Schema.define(version: 20180615131501) do
     t.index ["room_id"], name: "index_orders_on_room_id", using: :btree
   end
 
-  create_table "products", force: :cascade do |t|
+  create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",                      null: false
     t.integer  "category_id"
     t.integer  "price",                     null: false
@@ -111,7 +108,7 @@ ActiveRecord::Schema.define(version: 20180615131501) do
     t.index ["department_id"], name: "index_products_on_department_id", using: :btree
   end
 
-  create_table "rooms", force: :cascade do |t|
+  create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "hotel_id"
     t.string   "room_number"
     t.integer  "sub_number",                default: 0
