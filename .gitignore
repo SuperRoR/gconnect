@@ -23,4 +23,5 @@
 .idea
 .ruby-gemset
 /config/database.yml
+/config/secrets.yml
 
