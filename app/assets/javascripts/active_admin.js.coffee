@@ -8,6 +8,10 @@
 $(document).ready ->
   jQuery(".best_in_place").best_in_place()
 
+  $.datepicker.setDefaults({
+    dateFormat: 'yy-mm-dd'
+  });
+
   change_to_icon('.view_link', 'eye')
   change_to_icon('.delete_link', 'trash')
   change_to_icon('.edit_link', 'pencil')
@@ -20,3 +24,4 @@ change_to_icon = (klass, icon_name) ->
   $.each buttons, (_, button) ->
     button.text = ''
     $(button).addClass(klass+'_image fa fa-'+icon_name)
+

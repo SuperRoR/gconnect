@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180615131501) do
+ActiveRecord::Schema.define(version: 20180814025421) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "namespace"
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 20180615131501) do
     t.string   "room_number"
     t.integer  "sub_number",                default: 0
     t.string   "status",                    default: "checkout"
-    t.datetime "from"
+    t.date     "from"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
     t.integer  "days",                      default: 1
