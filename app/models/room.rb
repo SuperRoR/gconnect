@@ -81,6 +81,10 @@ class Room < ApplicationRecord
     "/signin/signin?code=#{code}&hotel_name=#{self.hotel.friendly_id}"
   end
 
+  def generate_qr_code(url)
+    "/signin/signin?code=#{code}&hotel_name=#{self.hotel.friendly_id}"
+  end
+
   def next_status
     if self.status == :checkout
       :checkin

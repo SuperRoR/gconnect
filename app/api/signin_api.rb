@@ -23,20 +23,26 @@ class SigninAPI < Grape::API
       }
     else
       room = current_room
-      if room.sign_in(params[:phone_type], params[:device_token1], params[:device_token2])
-        {
-            status: "OK",
-            from: room.from.to_s,
-            days: room.days.to_s,
-            sip_setting: {
-                ext_no: room.ext_no.to_s,
-                ext_password: room.ext_password.to_s,
-                wevo_pbx_domain: current_hotel.wevo_pbx_domain.to_s,
-            }
-        }
+      if room.status == :checkin
+        if room.sign_in(params[:phone_type], params[:device_token1], params[:device_token2])
+          {
+              status: "OK",
+              from: room.from.to_s,
+              days: room.days.to_s,
+              sip_setting: {
+                  ext_no: room.ext_no.to_s,
+                  ext_password: room.ext_password.to_s,
+                  wevo_pbx_domain: current_hotel.wevo_pbx_domain.to_s,
+              }
+          }
+        else
+          {
+              status: "ERROR: Wrong Hotel_Name or Room Code"
+          }
+        end
       else
         {
-            status: "ERROR: Wrong Hotel_Name or Room Code"
+              status: "ERROR: Not Checkin Status"
         }
       end
     end
