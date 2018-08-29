@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180829090803) do
+ActiveRecord::Schema.define(version: 20180829090903) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "namespace"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20180829090803) do
     t.boolean  "use_cloud",              default: true
     t.string   "manager_ext_no"
     t.string   "site_url"
+    t.string   "message_icon"
     t.index ["slug"], name: "index_hotels_on_slug", using: :btree
   end
 

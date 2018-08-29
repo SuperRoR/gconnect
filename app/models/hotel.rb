@@ -14,6 +14,7 @@
 class Hotel < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
+  mount_uploader :message_icon, IconUploader
 
   has_many :admin_users, dependent: :destroy
   has_many :order_details, through: :orders, dependent: :destroy

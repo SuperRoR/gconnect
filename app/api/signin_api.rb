@@ -35,6 +35,7 @@ class SigninAPI < Grape::API
                   wevo_pbx_domain: current_hotel.wevo_pbx_domain.to_s,
                   manager_ext_no: current_hotel.manager_ext_no,
                   site_url: current_hotel.site_url,
+                  message_icon_url: current_hotel.message_icon.url
 
               }
           }
