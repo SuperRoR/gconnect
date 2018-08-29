@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180814025421) do
+ActiveRecord::Schema.define(version: 20180829090803) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "namespace"
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 20180814025421) do
     t.string   "wevo_pbx_local_domain"
     t.string   "wevo_pbx_remote_domain", default: "cloudpbx.gconnect.com"
     t.boolean  "use_cloud",              default: true
+    t.string   "manager_ext_no"
+    t.string   "site_url"
     t.index ["slug"], name: "index_hotels_on_slug", using: :btree
   end
 

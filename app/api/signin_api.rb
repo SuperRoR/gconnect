@@ -33,6 +33,9 @@ class SigninAPI < Grape::API
                   ext_no: room.ext_no.to_s,
                   ext_password: room.ext_password.to_s,
                   wevo_pbx_domain: current_hotel.wevo_pbx_domain.to_s,
+                  manager_ext_no: current_hotel.manager_ext_no,
+                  site_url: current_hotel.site_url,
+
               }
           }
         else
