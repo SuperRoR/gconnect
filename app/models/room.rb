@@ -84,14 +84,10 @@ class Room < ApplicationRecord
     self.save
   end
 
-  def generate_qr_code_url
-    "/signin/signin?code=#{code}&hotel_name=#{self.hotel.friendly_id}"
+  def generate_qr_code_url(api_url)
+    api_url+"/signin/signin?code=#{code}&hotel_name=#{self.hotel.friendly_id}"
   end
-
-  def generate_qr_code(url)
-    "/signin/signin?code=#{code}&hotel_name=#{self.hotel.friendly_id}"
-  end
-
+  
   def next_status
     if self.status == :checkout
       :checkin

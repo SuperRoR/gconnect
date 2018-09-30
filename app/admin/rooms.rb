@@ -41,7 +41,7 @@ ActiveAdmin.register Room do
     column :ext_no2
     column :ext_password2
     actions do |room|
-      item "QR Code", "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=#{u(api_url+room.generate_qr_code_url)}", class: "member_link qrcode_link", download: "QRcode_for_#{room.room_number}", target: "_blank" unless current_admin_user.department_manager?
+      item "QR Code", qr_code_generate_admin_room_path(room.id) + ".png", class: "member_link qrcode_link", download: "QRcode_for_#{room.room_number}.png", target: "_blank" unless current_admin_user.department_manager?
     end
   end
   form do |f|
@@ -71,9 +71,15 @@ ActiveAdmin.register Room do
   end
 
   member_action :qr_code_generate, method: :get do
-    qrcode = RQRCode::QRCode.new(params[:id])
-    png = qrcode.as_png(size: 240, border_modules: 1)
-    send_data png
+    room = Room.find(params[:id]) rescue nil
+    if room
+      qrcode = RQRCode::QRCode.new(room.generate_qr_code_url(api_url))
+      png = qrcode.as_png(size: 240, border_modules: 1)
+      # byebug
+      # IO.write("/tmp/qrcode_#{srand}.png", png.to_s)
+      send_data png
+    end
+
   end
 
   controller do
