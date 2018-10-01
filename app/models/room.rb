@@ -102,6 +102,20 @@ class Room < ApplicationRecord
   end
 
   def checkout
+    if self.ext_phone_type1 == "android"
+      send_android_push_notification(self.ext_device_token_android1)
+    elsif self.ext_phone_type1 == "ios"
+      send_ios_push_notification('pushcert.pem',self.ext_device_token_ios1)
+      send_ios_push_notification('voip.pem',self.ext_device_token_android2)
+    end
+
+    if self.ext_phone_type2 == "android"
+      send_android_push_notification(self.ext_device_token_android2)
+    elsif self.ext_phone_type2 == "ios"
+      send_ios_push_notification('pushcert.pem',self.ext_device_token_ios2)
+      send_ios_push_notification('voip.pem',self.ext_device_token_android2)
+    end
+
     self.status = :checkout
     self.from = nil
     self.days = 1
@@ -113,5 +127,28 @@ class Room < ApplicationRecord
     self.ext_device_token_ios2 = nil
     self.sub_number = 0
     self.save
+  end
+
+  def send_android_push_notification(token)
+    fcm = FCM.new(ENV["FIREBASE_API_KEY"])
+
+    registration_ids= [token] # an array of one or more client registration tokens
+    options = {data: {val: "logout"}, collapse_key: "logout"}
+    fcm.send(registration_ids, options)
+  end
+
+  def send_ios_push_notification(pemfile, token)
+    APNS.host = 'gateway.push.apple.com'
+    # APNS.host = 'gateway.sandbox.push.apple.com'
+    # gateway.sandbox.push.apple.com is default
+
+    # APNS.pem = Rails.root.join('pushcert.pem')
+    APNS.pem = Rails.root.join(pemfile)
+    # this is the file you just created
+
+    APNS.port = 2195
+
+    APNS.send_notification(token, :alert => 'You have been checked out', :badge => 1, :sound => 'default',
+                           :other => {:val => 'You have been checked out'})
   end
 end
