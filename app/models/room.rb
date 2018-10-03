@@ -130,7 +130,7 @@ class Room < ApplicationRecord
   end
 
   def send_android_push_notification(token)
-    fcm = FCM.new(ENV["FIREBASE_API_KEY"])
+    fcm = FCM.new("AAAAAwR4D5g:APA91bFEo4-Q_lgXfEtyOPiARYbIBCeVMBfvhuTJknscUCKQgFMwpyqkIBXtQkJ5Gx_Si0-bg079Beu4tVVAljKnLpKVqzZRIdY2ZATahjOLWZCvhvgAoC6lfOH3vi_2cC9NSHjT7-E2")
 
     registration_ids= [token] # an array of one or more client registration tokens
     options = {data: {val: "logout"}, collapse_key: "logout"}
