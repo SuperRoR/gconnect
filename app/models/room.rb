@@ -127,14 +127,18 @@ class Room < ApplicationRecord
     self.ext_device_token_ios2 = nil
     self.sub_number = 0
     self.save
+
+    generate_code
   end
 
   def send_android_push_notification(token)
-    fcm = FCM.new("AAAAAwR4D5g:APA91bFEo4-Q_lgXfEtyOPiARYbIBCeVMBfvhuTJknscUCKQgFMwpyqkIBXtQkJ5Gx_Si0-bg079Beu4tVVAljKnLpKVqzZRIdY2ZATahjOLWZCvhvgAoC6lfOH3vi_2cC9NSHjT7-E2")
+    fcm = FCM.new("AAAAbfM3R9Y:APA91bFpE9_Spr6A7mEGxfJKs7HMYhhtnrj5J8090-N_H9E1bhWvb5dwrceI5LJiWAi2vcOVnEHR1LAqHO4aYlVNiMB34cK_88RA88u5Az1NwFieGmB6xVpS6yWEQj2CqsI3MZNdaTe8")
 
     registration_ids= [token] # an array of one or more client registration tokens
-    options = {data: {val: "logout"}, collapse_key: "logout"}
-    fcm.send(registration_ids, options)
+    option1 = {"notification": { "title": "You have been checked out!", "icon": "ic_stat_ic_notification", "sound": "default"}}
+    option2 = {data: {val: "logout"}, collapse_key: "logout"}
+    fcm.send(registration_ids, option1)
+    fcm.send(registration_ids, option2)
   end
 
   def send_ios_push_notification(pemfile, token)

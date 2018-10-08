@@ -22,6 +22,7 @@ class API < Grape::API
   mount SigninAPI
   mount ProductAPI
   mount OrderAPI
+  mount RoomConfigurationAPI
 
 end
 
