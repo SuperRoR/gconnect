@@ -128,7 +128,6 @@ class Room < ApplicationRecord
     self.sub_number = 0
     self.save
 
-    generate_code
   end
 
   def send_android_push_notification(token)
